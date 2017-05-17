@@ -1,0 +1,9 @@
+.Login-form button {
+  width: 40%;
+  margin: auto;
+  display: block;
+}
+
+.LoggedInWidget {
+  text-align: center;
+}

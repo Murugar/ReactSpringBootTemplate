@@ -1,0 +1,11 @@
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: /authenticate
+      refresh_path: /auth_refresh
+logging:
+  level:
+    org.springframework.web: DEBUG
