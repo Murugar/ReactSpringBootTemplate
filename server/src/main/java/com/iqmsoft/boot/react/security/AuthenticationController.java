@@ -47,6 +47,7 @@ public class AuthenticationController {
 
         // Return the token
         return ResponseEntity.ok(new JwtAuthenticationResponse(token, authenticationRequest.getUsername()));
+       
     }
 
     @GetMapping("${jwt.route.authentication.refresh_path}")
