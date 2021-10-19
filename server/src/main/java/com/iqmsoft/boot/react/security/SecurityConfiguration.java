@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,20 +28,14 @@ import java.util.Properties;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Value("${jwt.route.authentication.path}")
 	private String authPath;
+	
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+	    return super.authenticationManagerBean();
+	}
 
-	// @Autowired
-	// private UserDetailsService userDetailsService;
-
-	/*@Autowired
-	public void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder()).withUser("admin")
-				.password(bcrypt().encode("admin")).roles("USER", "ADMIN").and().withUser("user")
-				.password(bcrypt().encode("user")).roles("USER");
-
-		auth.userDetailsService(userDetailsService());
-
-	}*/
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -82,23 +77,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	}
 
-	/*
-	 * @Bean public UserDetailsService userDetailsService() {
-	 * InMemoryUserDetailsManager uds = new InMemoryUserDetailsManager(new
-	 * HashSet<>());
-	 * 
-	 * /*try {
-	 * 
-	 * 
-	 * if(!uds.userExists("admin")) { uds.createUser(new JwtUser("admin", new
-	 * BCryptPasswordEncoder().encode("admin"), Arrays.asList(new
-	 * SimpleGrantedAuthority("ROLE_ADMIN")), true)); } if(!uds.userExists("user"))
-	 * { uds.createUser(new JwtUser("user", new
-	 * BCryptPasswordEncoder().encode("user"), Arrays.asList(new
-	 * SimpleGrantedAuthority("ROLE_USER")), true)); } } catch(Exception e) {
-	 * 
-	 * e.printStackTrace(); }
-	 * 
-	 * return uds; }
-	 */
+	
 }
